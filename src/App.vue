@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <Bar v-bind:graphData="graphData" />
+    <Bar v-bind:graphData="graphData2" />
   </div>
 </template>
 

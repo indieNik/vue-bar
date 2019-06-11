@@ -3,7 +3,7 @@
     <h1>
       Vue Bar Chart
     </h1>
-    <canvas id="myCanvas"></canvas>
+    <canvas :id="id"></canvas>
   </div>
 </template>
 
@@ -14,8 +14,16 @@ import * as Utils from "../utilities/helpers";
 export default {
   name: "Bar",
   props: ["graphData", "padding", "gridScale", "gridColor"],
+  data () {
+    return {
+      id: null
+    }
+  },
+  created: function() {
+    this.id = this._uid // Generate Unique ID
+  },
   mounted: function() {
-    var myCanvas = document.getElementById("myCanvas");
+    let myCanvas = document.getElementById(this.id);
     myCanvas.width = this.graphData.meta.width;
     myCanvas.height = this.graphData.meta.height;
 
