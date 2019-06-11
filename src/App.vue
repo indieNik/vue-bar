@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <Bar v-bind:graphData="graphData" />
-    <Bar v-bind:graphData="graphData2" />
+    <Bar v-bind:graphData="graphData" class="vue-bar-chart"/>
+    <Bar v-bind:graphData="graphData2" class="vue-bar-chart"/>
   </div>
 </template>
 
@@ -93,5 +93,11 @@ export default {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+.vue-bar-chart {
+  width: 400px;
+  height: 400px;
+  margin: 100px;
 }
 </style>
