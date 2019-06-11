@@ -6,6 +6,7 @@
 </template>
 
 <script>
+/* eslint-disable */
 import Bar from "./components/Bar";
 export default {
   name: "app",
@@ -18,7 +19,7 @@ export default {
         meta: {
           width: 400,
           height: 400,
-          padding:10,
+          padding: 40,
           gridScale:5,
           gridColor:"#eeeeee",
         },
@@ -60,7 +61,7 @@ export default {
         meta: {
           width: 400,
           height: 400,
-          padding:30,
+          padding: 40,
           gridScale: 2,
           gridColor:"#333",
         },

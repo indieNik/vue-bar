@@ -19,6 +19,16 @@ export function drawBar(ctx, upperLeftCornerX, upperLeftCornerY, width, height, 
   ctx.restore();
 }
 
+export function drawLabel(ctx, label, x, y ) {
+  // console.log("Drawing Bar");
+  ctx.save();
+  ctx.fillStyle = "#333";
+  ctx.font = "bold 12px sans-serif";
+  ctx.textAlign = "center";
+  ctx.fillText(label, x, y);
+  ctx.restore();
+}
+
 export function barChart(options) {
   // console.log(options);
 
@@ -78,6 +88,24 @@ export function barChart(options) {
           barHeight,
           colors[barIndex%colors.length]
       );
+      barIndex++;
+    }
+
+    // drawing the x-axis labels
+    barIndex = 0;
+    numberOfBars = options.data.length;
+    barSize = (canvasActualWidth)/numberOfBars;
+
+    for (let categ in options.data){
+      let val = options.data[categ].value;
+      let label = options.data[categ].label;
+      let barHeight = Math.round( canvasActualHeight * val/maxValue) ;
+      drawLabel(
+        ctx,
+        label,
+        options.padding + barIndex * barSize + (barSize) / 2,
+        canvasActualHeight + 70
+      )
       barIndex++;
     }
   }
