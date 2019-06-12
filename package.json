@@ -1,7 +1,12 @@
 {
-  "name": "vue-bar",
-  "version": "0.1.0",
-  "private": true,
+  "name": "@indienik/vue-bar-chart",
+  "version": "0.0.1",
+  "private": false,
+  "description": "Simple Bar Chart in Vue.js and HTML5 Canvas",
+  "unpkg": "web-components/Vue-Bar.min.js",
+  "files": [
+    "web-components/"
+  ],
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
@@ -26,6 +31,26 @@
     "sass-loader": "^7.1.0",
     "vue-template-compiler": "^2.6.10"
   },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/indieNik/vue-bar.git"
+  },
+  "keywords": [
+    "web-components",
+    "vue",
+    "vue.js",
+    "bar-chart",
+    "chart",
+    "html5",
+    "canvas",
+    "component"
+  ],
+  "author": "Nikhil Patil",
+  "bugs": {
+    "url": "https://github.com/indieNik/vue-bar/issues"
+  },
+  "homepage": "https://github.com/indieNik/vue-bar#readme",
   "eslintConfig": {
     "root": true,
     "env": {
