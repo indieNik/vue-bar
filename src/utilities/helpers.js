@@ -19,6 +19,32 @@ export function drawBar(ctx, upperLeftCornerX, upperLeftCornerY, width, height, 
   ctx.restore();
 }
 
+export function drawTooltip(upperLeftCornerX, upperLeftCornerY, width, height, canvas, value ) {
+  // drawing tooltips
+  let tooltip = document.createElement("div");
+  canvas.addEventListener("mousemove", (e) => {
+    tooltip.style.position = "fixed";
+    tooltip.style.left = e.clientX + 20 + "px";
+    tooltip.style.top = e.clientY - 50 + "px";
+    tooltip.style.backgroundColor = "#fff";
+    tooltip.style.padding = "10px";
+    tooltip.style.borderRadius = "5px";
+    tooltip.style.display = "none";
+    tooltip.innerHTML = value;
+    let canvasX = e.target.getBoundingClientRect().left;
+    if((e.clientX - canvasX - 20 ) > upperLeftCornerX && (e.clientX - canvasX - 40) < (upperLeftCornerX + width)) {
+      tooltip.style.display = "block";
+    }
+
+    document.body.appendChild(tooltip)
+    // console.log("Tooltip: ", tooltip);
+  });
+
+  canvas.addEventListener("mouseleave", (e) => {
+    document.body.removeChild(tooltip);
+  });
+}
+
 export function drawLabel(ctx, label, x, y ) {
   // console.log("Drawing Bar");
   ctx.save();
@@ -57,8 +83,6 @@ export function barChart(options) {
         // console.log(options.data[categ]);
         maxValue = Math.max(maxValue,options.data[categ].value);
       }
-      // let canvasActualHeight = canvas.height - options.padding * 2;
-      // let canvasActualWidth = canvas.width - options.padding * 2;
 
       //drawing the grid lines
       let gridValue = 0;
@@ -118,6 +142,21 @@ export function barChart(options) {
           canvasActualHeight + 70
         )
         barIndex++;
+      }
+      
+      // Draw Tooltips
+      for (let categ in options.data){
+        let val = options.data[categ].value;
+        let label = options.data[categ].label;
+        let barHeight = Math.round( canvasActualHeight * val/maxValue) ;
+        drawTooltip(
+          options.padding + barIndex * barSize,
+          canvas.height - barHeight - options.padding,
+          barSize,
+          barHeight,
+          options.canvas,
+          val
+        );
       }
     }
   }

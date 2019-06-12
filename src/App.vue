@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <Bar v-bind:graphData="graphData" class="vue-bar-chart"/>
-    <Bar v-bind:graphData="graphData3" class="vue-bar-chart"/>
+    <Bar v-bind:graphData="graphData" class="vue-bar-chart" />
+    <Bar v-bind:graphData="graphData3" class="vue-bar-chart" />
   </div>
 </template>
 
