@@ -30,83 +30,95 @@ export function drawLabel(ctx, label, x, y ) {
 }
 
 export function barChart(options) {
-  // console.log(options);
-
-  // options = options;
   let canvas = options.canvas;
   let ctx = canvas.getContext("2d");
-  let colors = options.data.map(obj => {
-    return obj.color
-  })
-
-  return () => {
-    // console.log("Drawing Chart!");
-    let maxValue = 0;
-    for (let categ in options.data){
-      // console.log(options.data[categ]);
-      maxValue = Math.max(maxValue,options.data[categ].value);
-    }
-    let canvasActualHeight = canvas.height - options.padding * 2;
-    let canvasActualWidth = canvas.width - options.padding * 2;
-
-    //drawing the grid lines
-    let gridValue = 0;
-    while (gridValue <= maxValue){
-        let gridY = canvasActualHeight * (1 - gridValue/maxValue) + options.padding;
-        drawLine(
-            ctx,
-            0,
-            gridY,
-            canvas.width,
-            gridY,
-            options.gridColor
-        );
-
-        //writing grid markers
-        ctx.save();
-        ctx.fillStyle = options.gridColor;
-        ctx.font = "bold 10px Arial";
-        ctx.fillText(gridValue, 10,gridY - 2);
-        ctx.restore();
-
-        gridValue+=options.gridScale;
-    }
-
-    //drawing the bars
-    let barIndex = 0;
-    let numberOfBars = options.data.length;
-    let barSize = (canvasActualWidth)/numberOfBars;
-
-    for (let categ in options.data){
-      let val = options.data[categ].value;
-      let barHeight = Math.round( canvasActualHeight * val/maxValue) ;
-      drawBar(
-          ctx,
-          options.padding + barIndex * barSize,
-          canvas.height - barHeight - options.padding,
-          barSize,
-          barHeight,
-          colors[barIndex%colors.length]
-      );
-      barIndex++;
-    }
-
-    // drawing the x-axis labels
-    barIndex = 0;
-    numberOfBars = options.data.length;
-    barSize = (canvasActualWidth)/numberOfBars;
-
-    for (let categ in options.data){
-      let val = options.data[categ].value;
-      let label = options.data[categ].label;
-      let barHeight = Math.round( canvasActualHeight * val/maxValue) ;
+  let canvasActualHeight = canvas.height - options.padding * 2;
+  let canvasActualWidth = canvas.width - options.padding * 2;
+  if(!options.data) {
+    let label = "No Data to Display Graph";
+    return () => {
       drawLabel(
         ctx,
         label,
-        options.padding + barIndex * barSize + (barSize) / 2,
-        canvasActualHeight + 70
+        canvasActualWidth / 2,
+        canvasActualHeight / 2
       )
-      barIndex++;
+    }
+  } else {
+
+    let colors = options.data.map(obj => {
+      return obj.color
+    })
+
+    return () => {
+      // console.log("Drawing Chart!");
+      let maxValue = 0;
+      for (let categ in options.data){
+        // console.log(options.data[categ]);
+        maxValue = Math.max(maxValue,options.data[categ].value);
+      }
+      // let canvasActualHeight = canvas.height - options.padding * 2;
+      // let canvasActualWidth = canvas.width - options.padding * 2;
+
+      //drawing the grid lines
+      let gridValue = 0;
+      while (gridValue <= maxValue){
+          let gridY = canvasActualHeight * (1 - gridValue/maxValue) + options.padding;
+          drawLine(
+              ctx,
+              0,
+              gridY,
+              canvas.width,
+              gridY,
+              options.gridColor
+          );
+
+          //writing grid markers
+          ctx.save();
+          ctx.fillStyle = options.gridColor;
+          ctx.font = "bold 10px Arial";
+          ctx.fillText(gridValue, 10,gridY - 2);
+          ctx.restore();
+
+          gridValue+=options.gridScale;
+      }
+
+      //drawing the bars
+      let barIndex = 0;
+      let numberOfBars = options.data.length;
+      let barSize = (canvasActualWidth)/numberOfBars;
+
+      for (let categ in options.data){
+        let val = options.data[categ].value;
+        let barHeight = Math.round( canvasActualHeight * val/maxValue) ;
+        drawBar(
+            ctx,
+            options.padding + barIndex * barSize,
+            canvas.height - barHeight - options.padding,
+            barSize,
+            barHeight,
+            colors[barIndex%colors.length]
+        );
+        barIndex++;
+      }
+
+      // drawing the x-axis labels
+      barIndex = 0;
+      numberOfBars = options.data.length;
+      barSize = (canvasActualWidth)/numberOfBars;
+
+      for (let categ in options.data){
+        let val = options.data[categ].value;
+        let label = options.data[categ].label;
+        let barHeight = Math.round( canvasActualHeight * val/maxValue) ;
+        drawLabel(
+          ctx,
+          label,
+          options.padding + barIndex * barSize + (barSize) / 2,
+          canvasActualHeight + 70
+        )
+        barIndex++;
+      }
     }
   }
 }

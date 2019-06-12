@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Bar v-bind:graphData="graphData" class="vue-bar-chart"/>
-    <Bar v-bind:graphData="graphData2" class="vue-bar-chart"/>
+    <Bar v-bind:graphData="graphData3" class="vue-bar-chart"/>
   </div>
 </template>
 
@@ -82,7 +82,9 @@ export default {
             color: "#9993B2"
           }
         ]
-      }
+      },
+
+      graphData3: null
     };
   }
 };

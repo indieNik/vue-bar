@@ -13,17 +13,50 @@ import * as Utils from "../utilities/helpers";
 
 export default {
   name: "Bar",
-  props: ["graphData", "padding", "gridScale", "gridColor"],
+  props: ["graphData"],
   data () {
     return {
       id: null
     }
   },
   created: function() {
-    this.id = this._uid // Generate Unique ID
+    // console.log("this after created:", this);
   },
   mounted: function() {
-    let myCanvas = document.getElementById(this.id);
+    // Initial Render
+    let el = this.$el;
+    let myCanvas = el.getElementsByTagName("canvas")[0];
+    let myBarChart = null;
+
+    if(this.graphData) {
+      myCanvas.width = this.graphData.meta.width;
+      myCanvas.height = this.graphData.meta.height;
+
+      myBarChart = Utils.barChart({
+        canvas:myCanvas,
+        padding:  this.graphData.meta.padding,
+        gridScale:  this.graphData.meta.gridScale,
+        gridColor:  this.graphData.meta.gridColor,
+        data: this.graphData.data,
+      })
+    } else {
+      myCanvas.width = 400;
+      myCanvas.height = 400;
+      myBarChart = Utils.barChart({
+        canvas:myCanvas,
+        padding: 40,
+        data: null,
+      })
+    }
+
+    myBarChart();
+  },
+
+  updated: function() {
+    // Especially for Web Components
+    let el = this.$el;
+    let myCanvas = el.getElementsByTagName("canvas")[0];
+    
     myCanvas.width = this.graphData.meta.width;
     myCanvas.height = this.graphData.meta.height;
 
