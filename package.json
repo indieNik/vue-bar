@@ -5,6 +5,7 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
+    "build-wc": "vue-cli-service build && vue build --target wc --name Vue-Bar ./src/components/Bar.vue --dest web-components",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
