@@ -88,7 +88,7 @@ function _drawSvgBars(options) {
       // console.log("Leaving Rect: ", e);
       document.getElementById("bar-tooltip").remove();
     });
-    document.getElementById('svg-group').appendChild(rect);
+    svg.appendChild(rect);
     barIndex++;
   }
 }
