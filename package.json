@@ -1,6 +1,6 @@
 {
   "name": "@indienik/vue-bar-chart",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": false,
   "description": "Simple Bar Chart in Vue.js and HTML5 Canvas",
   "unpkg": "web-components/Vue-Bar.min.js",
