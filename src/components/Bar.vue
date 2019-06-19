@@ -19,56 +19,48 @@ export default {
       id: null
     }
   },
+  methods: {
+    drawChart: function( graphData ) {
+      let el = this.$el;
+      let canvas = el.getElementsByTagName("canvas")[0];
+      let graphObj = {};
+      let drawBarChart = null;
+      if( graphData ) {
+        canvas.width = graphData.meta.width;
+        canvas.height = graphData.meta.height;
+        graphObj = {
+          canvas:     canvas,
+          padding:    graphData.meta.padding,
+          gridScale:  graphData.meta.gridScale,
+          gridColor:  graphData.meta.gridColor,
+          data:       graphData.data,
+        }
+      } else {
+        canvas.width = 400;
+        canvas.height = 400;
+        graphObj = {
+          canvas:     canvas,
+          padding:    40,
+          gridScale:  5,
+          gridColor:  "#eee",
+          data:       null,
+        }
+      }
+      drawBarChart = Utils.barChart( graphObj )
+      drawBarChart();
+    }
+  },
   created: function() {
     // console.log("this after created:", this);
   },
   mounted: function() {
     // Initial Render
-    let el = this.$el;
-    let myCanvas = el.getElementsByTagName("canvas")[0];
-    let myBarChart = null;
-
-    if(this.graphData) {
-      myCanvas.width = this.graphData.meta.width;
-      myCanvas.height = this.graphData.meta.height;
-
-      myBarChart = Utils.barChart({
-        canvas:myCanvas,
-        padding:  this.graphData.meta.padding,
-        gridScale:  this.graphData.meta.gridScale,
-        gridColor:  this.graphData.meta.gridColor,
-        data: this.graphData.data,
-      })
-    } else {
-      myCanvas.width = 400;
-      myCanvas.height = 400;
-      myBarChart = Utils.barChart({
-        canvas:myCanvas,
-        padding: 40,
-        data: null,
-      })
-    }
-
-    myBarChart();
+    this.drawChart( this.graphData );
   },
 
   updated: function() {
-    // Especially for Web Components
-    let el = this.$el;
-    let myCanvas = el.getElementsByTagName("canvas")[0];
-    
-    myCanvas.width = this.graphData.meta.width;
-    myCanvas.height = this.graphData.meta.height;
-
-    let myBarChart = Utils.barChart({
-      canvas:myCanvas,
-        padding:  this.graphData.meta.padding,
-        gridScale:  this.graphData.meta.gridScale,
-        gridColor:  this.graphData.meta.gridColor,
-        data: this.graphData.data,
-    })
-
-    myBarChart();
+    // Especially for Web Components' initial render
+    this.drawChart( this.graphData );
   }
 };
 </script>
@@ -77,5 +69,7 @@ export default {
   canvas{
     width:100%;
     height:100%;
+    image-rendering: crisp-edges;
+    image-rendering: pixelated;
   }
 </style>
