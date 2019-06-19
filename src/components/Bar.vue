@@ -38,6 +38,7 @@ export default {
         gridScale:  this.graphData.meta.gridScale,
         gridColor:  this.graphData.meta.gridColor,
         data: this.graphData.data,
+        parent: el
       })
     } else {
       myCanvas.width = 400;
@@ -46,6 +47,7 @@ export default {
         canvas:myCanvas,
         padding: 40,
         data: null,
+        parent: el
       })
     }
 
@@ -66,6 +68,7 @@ export default {
         gridScale:  this.graphData.meta.gridScale,
         gridColor:  this.graphData.meta.gridColor,
         data: this.graphData.data,
+        parent: el
     })
 
     myBarChart();

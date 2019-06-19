@@ -103,22 +103,10 @@ export default {
   justify-content: space-between;
   align-items: center;
   .vue-bar-chart {
-    width: 40vw;
-    height: 100%;
+    width: 400px;
+    height: 400px;
+    margin-bottom: 100px;
   }
 }
 
-@media only screen and (max-width: 600px) {
-  .vue-bar-chart {
-    width: 100% !important;
-    height: 100%;
-    margin: inherit;
-  }
-}
-
-@media only screen and (min-width: 600px) and (max-width: 768px) {
-  .vue-bar-chart {
-    width: 80vw !important;
-  }
-}
 </style>
