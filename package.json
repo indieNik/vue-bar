@@ -1,17 +1,19 @@
 {
   "name": "@indienik/vue-bar-chart",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "private": false,
   "description": "Simple Bar Chart in Vue.js and HTML5 Canvas",
   "unpkg": "web-components/Vue-Bar.min.js",
   "files": [
-    "web-components/"
+    "web-components/",
+    "dist/"
   ],
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "build-wc": "vue-cli-service build && vue build --target wc --name Vue-Bar ./src/components/Bar.vue --dest web-components",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "deploy-surge": "cd dist && surge --domain vue-bar.surge.sh && cd .."
   },
   "dependencies": {
     "core-js": "^2.6.5",

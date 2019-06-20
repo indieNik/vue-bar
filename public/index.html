@@ -1,17 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-    <title>vue-bar</title>
-  </head>
-  <body>
-    <noscript>
-      <strong>We're sorry but vue-bar doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
-    </noscript>
-    <div id="app"></div>
-    <!-- built files will be auto injected -->
-  </body>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+  <title>vue-bar</title>
+</head>
+
+<body>
+  <noscript>
+    <strong>We're sorry but vue-bar doesn't work properly without JavaScript enabled. Please enable it to
+      continue.</strong>
+  </noscript>
+  <div id="app"></div>
+  <style>
+    .vue-bar-wrapper {
+      width: 30vw;
+      height: 50vh;
+      margin: 10vh;
+    }
+  </style>
+  <!--Use your custom element-->
+  <div class="vue-bar-wrapper">
+    <vue-bar id="vue-bar"></vue-bar>
+    <vue-bar></vue-bar>
+  </div>
+  <script>
+    let graphData = {
+      meta: {
+        width: 400,
+        height: 400,
+        padding: 40,
+        gridScale: 10,
+        gridColor: "#999",
+      },
+      data: [
+        {
+          label: "Jan",
+          value: 10,
+          color: "#81717A"
+        },
+        {
+          label: "Feb",
+          value: 35,
+          color: "#9D8CA1"
+        },
+        {
+          label: "Mar",
+          value: 40,
+          color: "#9993B2"
+        },
+        {
+          label: "Apr",
+          value: 20,
+          color: "#9993C2"
+        },
+        {
+          label: "May",
+          value: 60,
+          color: "#A7ABDD"
+        },
+        {
+          label: "Jun",
+          value: 75,
+          color: "#B4D4EE"
+        }
+      ]
+    }
+
+    let el = document.getElementById("vue-bar");
+    el.graphData = graphData;
+  </script>
+  <!-- built files will be auto injected -->
+</body>
+
 </html>
