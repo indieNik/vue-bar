@@ -39,13 +39,22 @@ function _drawTooltip(value) {
   // console.log("Tooltip: ", tooltip);
 }
 
-export function drawLabel(ctx, label, x, y ) {
-  // console.log("Drawing Bar");
+export function drawLabel(ctx, label, x, y, font, rotate ) {
+  console.log("Drawing Label");
   ctx.save();
   ctx.fillStyle = "#333";
-  ctx.font = "bold 12px sans-serif";
+  if(!font) {
+    ctx.font = "bold 12px sans-serif";
+  } else {
+    ctx.font = font;
+  }
   ctx.textAlign = "center";
-  ctx.fillText(label, x, y);
+  if(rotate) {
+    ctx.rotate(-Math.PI * 2 / 4);
+    ctx.fillText(label, y, x); // Reverse the coordinates for rotated canvas
+  } else {
+    ctx.fillText(label, x, y);
+  }
   ctx.restore();
 }
 
@@ -146,29 +155,6 @@ export function barChart(options) {
           gridValue+=options.gridScale;
       }
 
-      // //drawing the bars
-      // let barIndex = 0;
-      // let numberOfBars = options.data.length;
-      // let barSize = (canvasActualWidth)/numberOfBars;
-
-      // for (let categ in options.data){
-      //   let val = options.data[categ].value;
-      //   let barHeight = Math.round( canvasActualHeight * val/maxValue) ;
-      //   drawBar(
-      //       ctx,
-      //       options.padding + barIndex * barSize,
-      //       canvas.height - barHeight - options.padding,
-      //       barSize,
-      //       barHeight,
-      //       colors[barIndex%colors.length]
-      //   );
-      //   barIndex++;
-      // }
-
-      // // drawing the x-axis labels
-      // barIndex = 0;
-      // numberOfBars = options.data.length;
-      // barSize = (canvasActualWidth)/numberOfBars;
       let barIndex = 0;
       let numberOfBars = options.data.length;
       let barSize = (canvasActualWidth)/numberOfBars;
@@ -180,10 +166,28 @@ export function barChart(options) {
           ctx,
           label,
           options.padding + barIndex * barSize + (barSize) / 2,
-          canvasActualHeight + 70
+          canvasActualHeight + 60
         )
         barIndex++;
       }
+
+      // Drawing Axis Labels
+      drawLabel(
+        ctx,
+        options.xAxisLabel,
+        canvas.width / 2,
+        canvas.height - 1,
+        "18px sans-serif",
+        false
+      )
+      drawLabel(
+        ctx,
+        options.yAxisLabel,
+        20,
+        -canvas.height / 2,
+        "18px sans-serif",
+        true
+      )
     }
   }
 }

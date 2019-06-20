@@ -38,7 +38,9 @@ export default {
         gridScale:  this.graphData.meta.gridScale,
         gridColor:  this.graphData.meta.gridColor,
         data: this.graphData.data,
-        parent: el
+        parent: el,
+        xAxisLabel: this.graphData.meta.xAxisLabel,
+        yAxisLabel: this.graphData.meta.yAxisLabel
       })
     } else {
       myCanvas.width = 400;
@@ -47,7 +49,9 @@ export default {
         canvas:myCanvas,
         padding: 40,
         data: null,
-        parent: el
+        parent: el,
+        xAxisLabel: "X-Axis Label",
+        yAxisLabel: "Y-Axis Label"
       })
     }
 
@@ -68,7 +72,9 @@ export default {
         gridScale:  this.graphData.meta.gridScale,
         gridColor:  this.graphData.meta.gridColor,
         data: this.graphData.data,
-        parent: el
+        parent: el,
+        xAxisLabel: this.graphData.meta.xAxisLabel,
+        yAxisLabel: this.graphData.meta.yAxisLabel
     })
 
     myBarChart();

@@ -22,6 +22,8 @@ export default {
           padding: 40,
           gridScale:5,
           gridColor:"#eeeeee",
+          xAxisLabel: "Months",
+          yAxisLabel: "Values"
         },
         data: [
           {
@@ -64,6 +66,8 @@ export default {
           padding: 40,
           gridScale: 2,
           gridColor:"#333",
+          xAxisLabel: "Names",
+          yAxisLabel: "Height"
         },
         data: [
           {
